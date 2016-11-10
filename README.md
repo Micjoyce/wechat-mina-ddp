@@ -1,3 +1,7 @@
+# Warning(Experimental)
+
+>  This is just a pilot project, please used with caution in production
+
 ## Wrap Meteor DDP for wechat-mina(微信小程序)
 
 > inspired by [react-native-meteor](https://github.com/inProgress-team/react-native-meteor)
@@ -6,6 +10,10 @@ Meteor-like methods for wechat-mina
 
 > example for ddp test
 [react-native-meteor-example](https://github.com/Micjoyce/wechat-mina-ddp-example)
+
+## Todos
+
+> Add meteor-streamer
 
 # API
 
