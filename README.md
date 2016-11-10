@@ -54,6 +54,7 @@ App({
 })
 ```
 > Use at pages
+
 ```javascript
 //index.js
 //获取应用实例
