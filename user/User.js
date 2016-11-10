@@ -94,7 +94,6 @@ module.exports = {
   },
   _loginWithToken(value) {
     Data._tokenIdSaved = value;
-    console.log("-----------", Data._tokenIdSaved)
     if (value !== null){
       this._startLoggingIn();
       call('login', { resume: value }, (err, result) => {
@@ -112,13 +111,11 @@ module.exports = {
     var value = null;
     try {
       value = wx.getStorageSync(TOKEN_KEY);
-      console.log(value, "----");
 
     } catch (error) {
       console.warn('AsyncStorage error: ' + error.message);
     } finally {
       this._loginWithToken(value);
-      console.log(value, "--df--");
       callback(value);
     }
 
