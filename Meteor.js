@@ -3,9 +3,12 @@ var EJSON = require('./lib/ejson');
 var DDP = require('./lib/ddp');
 var Random = require('./lib/Random');
 var underscore = require('./lib/underscore');
+var _ = underscore;
+var utils = require('./lib/utils');
 
 var Data = require('./Data');
 var call = require('./Call');
+var collection = require('./Collection');
 
 var ReactiveDict = require('./ReactiveDict');
 
@@ -18,7 +21,9 @@ module.exports = {
   Tracker: Trackr,
   EJSON,
   ReactiveDict,
+  collection,
   underscore,
+  utils,
   getData() {
     return Data;
   },
@@ -130,23 +135,6 @@ module.exports = {
 
     });
 
-    // 全部交由前端自行处理
-    // Data.ddp.on("added", message => {
-    //   if(!Data.db[message.collection]) {
-    //     Data.db.addCollection(message.collection)
-    //   }
-    //   Data.db[message.collection].upsert({_id: message.id, ...message.fields});
-    // });
-    //
-    // Data.ddp.on("changed", message => {
-    //   Data.db[message.collection] && Data.db[message.collection].upsert({_id: message.id, ...message.fields});
-    // });
-    //
-    // Data.ddp.on("removed", message => {
-    //   Data.db[message.collection] && Data.db[message.collection].del(message.id);
-    // });
-
-
     Data.ddp.on("ready", message => {
       const idsMap = new Map();
       for(var i in Data.subscriptions) {
@@ -163,7 +151,35 @@ module.exports = {
         }
       }
     });
+    // 全部交由前端自行处理
+    Data.ddp.on("added", message => {
+      if(!Data.db[message.collection]) {
+        Data.db.addCollection(message.collection)
+      }
+      var record = {
+        _id: message.id
+      }
+      _.extend(record, message.fields);
+      Data.db[message.collection].upsert(record);
+    });
 
+    Data.ddp.on("changed", message => {
+      var record = {
+        _id: message.id
+      }
+      _.extend(record, message.fields);
+      // if have some fileds del by server, will get message.cleared, and minimongo
+      // can't delete,
+      // You shouldn't delete fileds at server
+      if (message.cleared && message.cleared.length > 0) {
+        console.log("You should not delete fileds at server");
+      }
+      Data.db[message.collection] && Data.db[message.collection].upsert(record);
+    });
+
+    Data.ddp.on("removed", message => {
+      Data.db[message.collection] && Data.db[message.collection].del(message.id);
+    });
     Data.ddp.on("result", message => {
       const call = Data.calls.find(call=>call.id==message.id);
       if(typeof call.callback == 'function') call.callback(message.error, message.result);

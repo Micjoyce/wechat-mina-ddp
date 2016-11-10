@@ -6,17 +6,13 @@ const TOKEN_KEY = 'wxmeteor_usertoken';
 
 module.exports = {
   user() {
-    console.log("没有使用minimongo，你需要自行处理用户登录事件，可以通过DDP.on()来监听")
-    return "";
-    // if(!this._userIdSaved) return null;
-    // return this.collection('users').findOne(this._userIdSaved);
+    if(!this._userIdSaved) return null;
+    return this.collection('users').findOne(this._userIdSaved);
   },
   userId() {
-    console.log("没有使用minimongo，你需要自行处理用户登录事件，可以通过DDP.on()来监听")
-    return "";
-    // if(!this._userIdSaved) return null;
-    // const user = this.collection('users').findOne(this._userIdSaved);
-    // return user && user._id;
+    if(!this._userIdSaved) return null;
+    const user = this.collection('users').findOne(this._userIdSaved);
+    return user && user._id;
   },
   _isLoggingIn: true,
   loggingIn() {
@@ -98,6 +94,7 @@ module.exports = {
   },
   _loginWithToken(value) {
     Data._tokenIdSaved = value;
+    console.log("-----------", Data._tokenIdSaved)
     if (value !== null){
       this._startLoggingIn();
       call('login', { resume: value }, (err, result) => {
@@ -115,10 +112,13 @@ module.exports = {
     var value = null;
     try {
       value = wx.getStorageSync(TOKEN_KEY);
+      console.log(value, "----");
+
     } catch (error) {
       console.warn('AsyncStorage error: ' + error.message);
     } finally {
       this._loginWithToken(value);
+      console.log(value, "--df--");
       callback(value);
     }
 
