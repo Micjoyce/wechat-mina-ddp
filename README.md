@@ -9,7 +9,7 @@
 Meteor-like methods for wechat-mina
 
 > example for ddp test
-[react-native-meteor-example](https://github.com/Micjoyce/wechat-mina-ddp-example)
+[wechat-mina-ddp-example](https://github.com/Micjoyce/wechat-mina-ddp-example)
 
 ## Todos
 
