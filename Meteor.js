@@ -182,6 +182,10 @@ module.exports = {
     });
     Data.ddp.on("result", message => {
       const call = Data.calls.find(call=>call.id==message.id);
+      // if can't find call return
+      if (!call) {
+        return console.log(`Cant find message: ${message}, callback`);
+      }
       if(typeof call.callback == 'function') call.callback(message.error, message.result);
       Data.calls.splice(Data.calls.findIndex(call=>call.id==message.id), 1);
     });

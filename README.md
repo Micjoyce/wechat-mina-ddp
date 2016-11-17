@@ -13,7 +13,60 @@ Meteor-like methods for wechat-mina
 
 ## Todos
 
-> Add meteor-streamer
+# Support meteor-streamer
+
+## How to use meteor-streamer for wechat-mina
+
+### You must add meteor-streamer to you meteor project
+
+```shell
+cd wxMeteor  // You meteor project
+meteor add meteor-streamer
+```
+
+### Create streamer at server
+
+```shell
+cd wxMeteor/server
+touch streamer.js
+vi streamer.js
+```
+
+### Write a streamer
+
+```javascript
+msgStreamer = new Meteor.Streamer('message');
+
+msgStreamer.allowRead('all');
+msgStreamer.allowWrite('all');
+
+
+Meteor.startup(function(){
+  Meteor.setInterval(function(){
+    msgStreamer.emit("message", {msg: "hello"});
+  }, 1000);
+});
+
+```
+
+
+###  Use it At wx-mina
+
+```javascript
+// Meteor streamer
+var Streamer = require('./meteor/stream/Streamer');
+wx.Streamer = Streamer;
+
+var msgStreamer = new Streamer("message");
+wx.msgStreamer = msgStreamer;
+msgStreamer.on('message', function(msg) {
+  console.log(msg);
+});
+
+```
+
+> Then You wxapp will get a message for each second
+
 
 # API
 
