@@ -13,6 +13,10 @@ Meteor-like methods for wechat-mina
 
 ## Todos
 
+> Local cache for mimimongo
+
+
+
 # Support meteor-streamer
 
 ## How to use meteor-streamer for wechat-mina
