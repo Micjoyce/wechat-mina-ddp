@@ -227,10 +227,12 @@ Disconnect from the DDP server.
 ## Availables packages
 
 ###  Convenience packages
-Example `import { composeWithTracker } from 'react-native-meteor';``
+Example `var Meteor = require('./meteor/Meteor');``
 
-* EJSON
-* Tracker
+* Meteor.EJSON
+* Meteor.Tracker
+* Meteor.JSON
+* Meteor.underscore
 
 ### ReactiveDict
 
