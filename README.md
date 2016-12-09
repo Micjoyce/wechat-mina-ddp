@@ -220,7 +220,7 @@ Disconnect from the DDP server.
 ## Meteor methods
 
 * [Meteor.call](http://docs.meteor.com/#/full/meteor_call)
-* [Meteor.loginWithPassword](http://docs.meteor.com/#/full/meteor_loginwithpassword) (Please note that user is auto-resigned in - like in Meteor Web applications - thanks to React Native AsyncStorage.)
+* [Meteor.loginWithPassword](http://docs.meteor.com/#/full/meteor_loginwithpassword) (Please note that user is auto-resigned in - like in Meteor Web applications - use wx Storage store user token.)
 * [Meteor.logout](http://docs.meteor.com/#/full/meteor_logout)
 * [Meteor.logoutOtherClients](http://docs.meteor.com/#/full/meteor_logoutotherclients)
 

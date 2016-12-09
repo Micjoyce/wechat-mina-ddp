@@ -92,7 +92,7 @@ module.exports = {
     // SocketConstructor = null;
     this.ddp = Data.ddp = new DDP(options);
 
-    // 更具网络信号来判定是否重连
+    // 根据网络信号来判定是否重连
     // NetInfo.isConnected.addEventListener('change', isConnected=>{
     //   if(isConnected && Data.ddp.autoReconnect) {
     //     Data.ddp.connect();
