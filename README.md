@@ -21,10 +21,10 @@ Meteor-like methods for wechat-mina
 
 ## How to use meteor-streamer for wechat-mina
 
-### You must add meteor-streamer to you meteor project
+### You must add meteor-streamer to your meteor project
 
 ```shell
-cd wxMeteor  // You meteor project
+cd wxMeteor  // Your meteor project
 meteor add meteor-streamer
 ```
 
@@ -69,7 +69,7 @@ msgStreamer.on('message', function(msg) {
 
 ```
 
-> Then You wxapp will get a message for each second
+> Then You wxapp will get a message for per second
 
 
 # API
